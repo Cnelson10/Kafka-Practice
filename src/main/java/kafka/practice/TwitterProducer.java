@@ -11,10 +11,13 @@ import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -45,6 +48,7 @@ public class TwitterProducer {
         client.connect();
 
         // TODO create Kafka produce
+        KafkaProducer<String, String> producer = createKafkaProducer();
 
         // create loop to send tweets to Kafka
         // on a different thread, or multiple different threads....
@@ -58,6 +62,13 @@ public class TwitterProducer {
             }
             if(msg != null){
                 logger.info(msg);
+                producer.send(new ProducerRecord<String, String>("twitter_tweets", null, msg), new Callback() {
+                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                        if (e != null) {
+                            logger.error("Error: ", e);
+                        }
+                    }
+                });
             }
             logger.info("End of application");
         }
@@ -91,5 +102,18 @@ public class TwitterProducer {
 
         Client hosebirdClient = builder.build();
         return hosebirdClient;
+    }
+
+    public KafkaProducer<String, String> createKafkaProducer() {
+        String bootstrapServer = dotenv.get("BOOTSTRAP_SERVER");
+
+        // create producer properties
+        Properties properties = new Properties();
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
+        // create the producer
+        return new KafkaProducer<String, String>(properties);
     }
 }
