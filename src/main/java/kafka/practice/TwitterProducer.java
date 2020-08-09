@@ -50,7 +50,15 @@ public class TwitterProducer {
         // create Kafka produce
         KafkaProducer<String, String> producer = createKafkaProducer();
 
-        // TODO add a shutdown hook
+        // add a shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            logger.info("stopping application...");
+            logger.info("shutting down client from Twitter...");
+            client.stop();
+            logger.info("closing producer...");
+            producer.close();
+            logger.info("done!");
+        }));
 
         // create loop to send tweets to Kafka
         // on a different thread, or multiple different threads....
