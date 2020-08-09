@@ -4,6 +4,7 @@
     <list default="true" id="173f144b-3b00-4037-ab89-dc861c39150f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kafka/practice/TwitterProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kafka/practice/TwitterProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kafka/practice/TwitterProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kafka/practice/TwitterProducer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +67,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596751479936</updated>
-      <workItem from="1596751486739" duration="5225000" />
+      <workItem from="1596751486739" duration="6703000" />
     </task>
     <servers />
   </component>
@@ -86,6 +87,22 @@
       <screen x="0" y="23" width="1280" height="712" />
     </state>
     <state x="374" y="189" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.712/1280.-81.1920.1057@0.23.1280.712" timestamp="1596757787394" />
+    <state width="730" height="176" key="GridCell.Tab.0.bottom" timestamp="1597012676254">
+      <screen x="0" y="23" width="1280" height="712" />
+    </state>
+    <state width="730" height="176" key="GridCell.Tab.0.bottom/0.23.1280.712@0.23.1280.712" timestamp="1597012676254" />
+    <state width="730" height="176" key="GridCell.Tab.0.center" timestamp="1597012676253">
+      <screen x="0" y="23" width="1280" height="712" />
+    </state>
+    <state width="730" height="176" key="GridCell.Tab.0.center/0.23.1280.712@0.23.1280.712" timestamp="1597012676253" />
+    <state width="730" height="176" key="GridCell.Tab.0.left" timestamp="1597012676251">
+      <screen x="0" y="23" width="1280" height="712" />
+    </state>
+    <state width="730" height="176" key="GridCell.Tab.0.left/0.23.1280.712@0.23.1280.712" timestamp="1597012676251" />
+    <state width="730" height="176" key="GridCell.Tab.0.right" timestamp="1597012676253">
+      <screen x="0" y="23" width="1280" height="712" />
+    </state>
+    <state width="730" height="176" key="GridCell.Tab.0.right/0.23.1280.712@0.23.1280.712" timestamp="1597012676253" />
     <state x="17" y="83" key="new project wizard" timestamp="1596752459966">
       <screen x="0" y="23" width="1280" height="712" />
     </state>

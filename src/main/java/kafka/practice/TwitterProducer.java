@@ -47,8 +47,10 @@ public class TwitterProducer {
         // Attempt to establish a connection
         client.connect();
 
-        // TODO create Kafka produce
+        // create Kafka produce
         KafkaProducer<String, String> producer = createKafkaProducer();
+
+        // TODO add a shutdown hook
 
         // create loop to send tweets to Kafka
         // on a different thread, or multiple different threads....
@@ -79,6 +81,8 @@ public class TwitterProducer {
     String token = dotenv.get("TOKEN");
     String secret = dotenv.get("SECRET");
 
+    List<String> terms = Lists.newArrayList("kafka");
+
     public Client createTwitterClient(BlockingQueue<String> msgQueue) {
 
         /* Declaring the connection */
@@ -86,7 +90,6 @@ public class TwitterProducer {
         Hosts hosebirdHosts = new HttpHosts(Constants.STREAM_HOST);
         StatusesFilterEndpoint hosebirdEndpoint = new StatusesFilterEndpoint();
 
-        List<String> terms = Lists.newArrayList("trump");
         hosebirdEndpoint.trackTerms(terms);
 
         // These secrets should be read from a config file
