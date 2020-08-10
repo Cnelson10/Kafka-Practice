@@ -78,10 +78,8 @@ public class ElasticSearchConsumer {
         return consumer;
     }
 
-    private static JsonParser jsonParser = new JsonParser();
-
     private static String extractIdFromTweet(String tweetJson) {
-        return jsonParser.parse(tweetJson).getAsJsonObject().get("id_str").getAsString();
+        return JsonParser.parseString(tweetJson).getAsJsonObject().get("id_str").getAsString();
     }
 
     public static void main(String[] args) throws IOException {
