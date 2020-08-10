@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="173f144b-3b00-4037-ab89-dc861c39150f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kafka-producer-twitter/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kafka-producer-twitter/src/main/java/practice/TwitterProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/src/main/java/kafka/practice/ElasticSearchConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kafka/practice/TwitterProducer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kafka/practice/TwitterProducer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kafka/practice/TwitterProducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kafka/practice/TwitterProducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-consumer-elasticsearch/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-producer-twitter/src/main/java/practice/TwitterProducer.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +45,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="practice" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="TwitterProducer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="kafka.practice.TwitterProducer" />
@@ -79,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596751479936</updated>
-      <workItem from="1596751486739" duration="10455000" />
+      <workItem from="1596751486739" duration="12222000" />
     </task>
     <servers />
   </component>
@@ -100,26 +101,34 @@
       <screen x="0" y="23" width="1280" height="712" />
     </state>
     <state x="374" y="189" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.712/1280.-81.1920.1057@0.23.1280.712" timestamp="1596757787394" />
-    <state width="1238" height="176" key="GridCell.Tab.0.bottom" timestamp="1597019545876">
+    <state x="133" y="344" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1597022788951">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="133" y="344" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597022788951" />
+    <state width="1238" height="176" key="GridCell.Tab.0.bottom" timestamp="1597022797476">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="730" height="176" key="GridCell.Tab.0.bottom/0.23.1280.712@0.23.1280.712" timestamp="1597012676254" />
-    <state width="1238" height="176" key="GridCell.Tab.0.bottom/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597019545876" />
-    <state width="1238" height="176" key="GridCell.Tab.0.center" timestamp="1597019545874">
+    <state width="1238" height="176" key="GridCell.Tab.0.bottom/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597022797476" />
+    <state width="1238" height="176" key="GridCell.Tab.0.center" timestamp="1597022797475">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="730" height="176" key="GridCell.Tab.0.center/0.23.1280.712@0.23.1280.712" timestamp="1597012676253" />
-    <state width="1238" height="176" key="GridCell.Tab.0.center/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597019545874" />
-    <state width="1238" height="176" key="GridCell.Tab.0.left" timestamp="1597019545873">
+    <state width="1238" height="176" key="GridCell.Tab.0.center/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597022797475" />
+    <state width="1238" height="176" key="GridCell.Tab.0.left" timestamp="1597022797474">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="730" height="176" key="GridCell.Tab.0.left/0.23.1280.712@0.23.1280.712" timestamp="1597012676251" />
-    <state width="1238" height="176" key="GridCell.Tab.0.left/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597019545873" />
-    <state width="1238" height="176" key="GridCell.Tab.0.right" timestamp="1597019545875">
+    <state width="1238" height="176" key="GridCell.Tab.0.left/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597022797474" />
+    <state width="1238" height="176" key="GridCell.Tab.0.right" timestamp="1597022797475">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="730" height="176" key="GridCell.Tab.0.right/0.23.1280.712@0.23.1280.712" timestamp="1597012676253" />
-    <state width="1238" height="176" key="GridCell.Tab.0.right/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597019545875" />
+    <state width="1238" height="176" key="GridCell.Tab.0.right/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597022797475" />
+    <state x="178" y="73" key="Maven.ArtifactSearchDialog" timestamp="1597023156914">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="178" y="73" key="Maven.ArtifactSearchDialog/0.23.1280.777/1280.-81.1920.992@0.23.1280.777" timestamp="1597023156914" />
     <state x="17" y="88" key="new project wizard" timestamp="1597021898794">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
