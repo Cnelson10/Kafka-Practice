@@ -1,6 +1,6 @@
 # Kafka-Practice
 
-## Set up Twitter Keys and Tokens
+## Set up Twitter API
 Create a Twitter Developer account. When your aacount is approved go to 'Apps' in the dropdown section and click the 'Create an app' button. Once you've gone through the set up process go to the 'Keys and tokens' section of your newly created app. In this section you'll find your API key, API secret key, Access token and Access token secret. You will go into your project folder and create a .env file where you will stash these keys and tokens. Set them equal to the variable names CONSUMER_KEY, CONSUMER_SECRET, TOKEN, SECRET respectively with your keys and tokens in quotes. 
 
 ## Create a Kafka Topic
