@@ -9,14 +9,17 @@ import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class ElasticSearchConsumer {
 
     public static RestHighLevelClient createClient() {
 
-        String hostname = "";
-        String username = "";
-        String password = "";
+        Dotenv dotenv = Dotenv.load();
+
+        String hostname = dotenv.get("HOSTNAME");
+        String username = dotenv.get("USERNAME");
+        String password = dotenv.get("PASSWORD");
 
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
