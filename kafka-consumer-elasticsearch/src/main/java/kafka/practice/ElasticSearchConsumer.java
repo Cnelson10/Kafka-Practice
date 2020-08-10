@@ -7,6 +7,7 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -17,11 +18,14 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -75,23 +79,29 @@ public class ElasticSearchConsumer {
         // create a client for us to insert data into
         RestHighLevelClient client = createClient();
 
-        // test data
-        String jsonString = "{ \"test1\": \"testtest\" }";
-
-        // insert json into our index and get back its id
-        IndexRequest indexRequest = new IndexRequest(
-                "twitter",
-                "tweets"
-        ).source(jsonString, XContentType.JSON);
-
-        IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
-        String id = indexResponse.getId();
-        logger.info(id);
-
         // create our consumer
         KafkaConsumer<String, String> consumer = createConsumer("twitter_tweets");
 
+        //poll for new data
+        while(true) {
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+
+            for (ConsumerRecord<String, String> record: records){
+                // TODO insert data into ElasticSearch
+                IndexRequest request = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+
+                IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
+                String id = indexResponse.getId();
+                logger.info(id);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         // close client
-        client.close();
+        //client.close();
     }
 }
