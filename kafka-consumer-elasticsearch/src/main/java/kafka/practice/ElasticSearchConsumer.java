@@ -1,5 +1,6 @@
 package kafka.practice;
 
+import com.google.gson.JsonParser;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -18,8 +19,6 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.elasticsearch.client.indices.CreateIndexRequest;
-import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +72,12 @@ public class ElasticSearchConsumer {
         return consumer;
     }
 
+    private static JsonParser jsonParser = new JsonParser();
+
+    private static String extractIdFromTweet(String tweetJson) {
+        return jsonParser.parse(tweetJson).getAsJsonObject().get("id_str").getAsString();
+    }
+
     public static void main(String[] args) throws IOException {
         Logger logger = LoggerFactory.getLogger(ElasticSearchConsumer.class.getName());
 
@@ -87,12 +92,15 @@ public class ElasticSearchConsumer {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
             for (ConsumerRecord<String, String> record: records){
-                // TODO insert data into ElasticSearch
-                IndexRequest request = new IndexRequest("twitter").source(record.value(), XContentType.JSON);
+
+                // extract id from tweet
+                String id = extractIdFromTweet(record.value());
+
+                // insert data into ElasticSearch
+                IndexRequest request = new IndexRequest("twitter", "tweets", id).source(record.value(), XContentType.JSON);
 
                 IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
-                String id = indexResponse.getId();
-                logger.info(id);
+                logger.info(indexResponse.getId());
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
