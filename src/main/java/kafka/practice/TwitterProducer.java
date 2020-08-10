@@ -89,7 +89,7 @@ public class TwitterProducer {
     String token = dotenv.get("TOKEN");
     String secret = dotenv.get("SECRET");
 
-    List<String> terms = Lists.newArrayList("kafka");
+    List<String> terms = Lists.newArrayList("coronavirus", "astros", "lonzo", "trump", "biden", "tiktok");
 
     public Client createTwitterClient(BlockingQueue<String> msgQueue) {
 
@@ -130,7 +130,13 @@ public class TwitterProducer {
         properties.setProperty(ProducerConfig.RETRIES_CONFIG, Integer.toString(Integer.MAX_VALUE));
         properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
 
-        // TODO create producer with higher throughput
+        // create producer with higher throughput (trade offs- a bit of latency and CPU usage)
+        // message compression
+        properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
+        // delay producer by 20 milliseconds to allow it the chance to batch multiple tweets into kafka at a time
+        properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20");
+        // double the default batch size to 32 KB
+        properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(32*1024));
 
         // create the producer
         return new KafkaProducer<String, String>(properties);
