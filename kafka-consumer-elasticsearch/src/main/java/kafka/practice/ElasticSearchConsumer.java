@@ -102,15 +102,18 @@ public class ElasticSearchConsumer {
 
             BulkRequest bulkRequest = new BulkRequest();
             for (ConsumerRecord<String, String> record: records){
+                try {
+                    // extract id from tweet
+                    String id = extractIdFromTweet(record.value());
 
-                // extract id from tweet
-                String id = extractIdFromTweet(record.value());
+                    // insert data into ElasticSearch
+                    IndexRequest request = new IndexRequest("twitter", "tweets", id).source(record.value(), XContentType.JSON);
 
-                // insert data into ElasticSearch
-                IndexRequest request = new IndexRequest("twitter", "tweets", id).source(record.value(), XContentType.JSON);
-
-                // add to our bulk request
-                bulkRequest.add(request);
+                    // add to our bulk request
+                    bulkRequest.add(request);
+                } catch (NullPointerException e) {
+                    logger.warn("skipping bad data: " + record.value());
+                }
             }
             if(recordCount > 0) {
                 BulkResponse bulkResponse = client.bulk(bulkRequest, RequestOptions.DEFAULT);
